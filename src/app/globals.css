@@ -24,3 +24,9 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.favorite-button {
+  width: 2em;
+  height: 2em;
+  text-align: center;
+}

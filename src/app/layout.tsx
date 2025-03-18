@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Toaster } from 'react-hot-toast';
 import './globals.css'
+import {FavoritesStorageProvider} from "@/providers/FavoritesStorageProvider";
 
 export default function RootLayout({
   children,
@@ -33,7 +34,9 @@ export default function RootLayout({
             </div>
           </div>
         </nav>
-        {children}
+        <FavoritesStorageProvider>
+          {children}
+        </FavoritesStorageProvider>
       </body>
     </html>
   );

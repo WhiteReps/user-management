@@ -1,19 +1,18 @@
 "use client";
 
-import { useLocalStorage } from '@/hooks/useLocalStorage';
 import UserCard from '@/components/UserCard';
 import { useState } from 'react';
 import { User } from '@/lib/api';
 import { useUsers } from '@/hooks/useUsers';
 import Spinner from '@/components/Spinner';
 import UserInfoModal from '@/components/UserInfoModal';
+import {useFavoritesStorageContext} from "@/providers/FavoritesStorageProvider";
 
 export default function Favorites() {
-  const [favorites, setFavorites] = useLocalStorage<User[]>('favorites', []);
+  const [favorites, setFavorites] = useFavoritesStorageContext();
   const { loading } = useUsers();
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
 
   const handleRemoveFavorite = (userId: number) => {
     setFavorites(favorites.filter((fav) => fav.id !== userId));

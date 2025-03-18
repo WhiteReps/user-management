@@ -1,12 +1,12 @@
 "use client";
 
 import { User } from '../lib/api';
-import { useLocalStorage } from '../hooks/useLocalStorage';
 import toast from 'react-hot-toast';
 import { useState } from 'react';
 import DropdownMenu from './DropdownMenu';
 import { UserCircleIcon } from '@heroicons/react/24/outline';
 import { EllipsisVerticalIcon } from '@heroicons/react/24/outline';
+import {useFavoritesStorageContext} from "@/providers/FavoritesStorageProvider";
 
 interface UserCardProps {
   user: User;
@@ -15,7 +15,7 @@ interface UserCardProps {
 }
 
 export default function UserCard({ user, onClick, onRemove }: UserCardProps) {
-  const [favorites, setFavorites] = useLocalStorage<User[]>('favorites', []);
+  const [favorites, setFavorites] = useFavoritesStorageContext();
   const [isClicked, setIsClicked] = useState(false);
 
   const isFavorite = favorites.some((fav) => fav.id === user.id);
@@ -60,6 +60,7 @@ export default function UserCard({ user, onClick, onRemove }: UserCardProps) {
         onClick={toggleFavorite}
         data-cy="favorite-button"
         className={`
+          favorite-button
           absolute bottom-3 right-3 p-1 rounded-full transition-colors duration-200
           ${isFavorite ? 'bg-red-300' : 'bg-gray-300'}
         `}
